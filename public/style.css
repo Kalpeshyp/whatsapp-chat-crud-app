@@ -1,0 +1,105 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Body */
+body {
+  background-color: #ece5dd;
+  padding: 20px;
+}
+
+/* Heading */
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #075e54;
+}
+
+/* Create Button */
+form[action="/chats/new"] {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form button {
+  background-color: #25d366;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #1ebe5d;
+}
+
+/* Chat Card */
+.chats {
+  background-color: #ffffff;
+  width: 60%;
+  margin: auto;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* From & To */
+.chats p i {
+  color: #128c7e;
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Message Box */
+.msg {
+  background-color: #dcf8c6;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* Message Text */
+.msg p {
+  margin-bottom: 8px;
+}
+
+/* Edit & Delete Buttons */
+.msg form {
+  display: inline-block;
+}
+
+.msg button {
+  background-color: #34b7f1;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.msg form[action*="DELETE"] button {
+  background-color: #ff4d4d;
+}
+
+/* Time */
+.chats p:last-of-type {
+  font-size: 12px;
+  color: gray;
+}
+
+/* Divider */
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .chats {
+    width: 95%;
+  }
+}
