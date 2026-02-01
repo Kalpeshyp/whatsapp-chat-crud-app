@@ -24,12 +24,12 @@ async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/whatsapp');
 }
 
-let chat1 = new Chat({
-  from:"marii",
-  to:"gana",
-  msg:"send your photo",
-  create_at:new Date()
-});
+// let chat1 = new Chat({
+//   from:"marii",
+//   to:"gana",
+//   msg:"send your photo",
+//   create_at:new Date()
+// });
 
 // chat1.save().then((res)=>{
 //   console.log(res);
@@ -37,14 +37,24 @@ let chat1 = new Chat({
 
 //Chat.deleteMany({from:"marii"});
 
-app.get("/chats",async(req,res)=>{
-  let chats = await Chat.find();
+app.get("/chats", async (req, res) => {
+  try {
+     let chats = await Chat.find();
   console.log(chats);
 res.render("index.ejs",{chats});
+  }catch (err) {
+    console.log(err);
+  }
+ 
 })
 
-app.get("/chats/new",(req,res)=>{
+app.get("/chats/new", (req, res) => {
+  try {
   res.render("new.ejs");
+    
+  } catch (err) {
+    console.log(err);
+  }
 })
 
 app.post("/chats",(req,res)=>{
@@ -63,29 +73,40 @@ app.post("/chats",(req,res)=>{
         res.redirect("/chats");
 })
 
-app.get("/chats/:id/edit",async(req,res)=>{
-  let{id} = req.params;
-  let chat = await Chat.findById(id);
-  res.render("edit.ejs",{chat});
+app.get("/chats/:id/edit", async (req, res) => {
+  try {
+    let { id } = req.params;
+    let chat = await Chat.findById(id);
+    res.render("edit.ejs", { chat });
+  } catch (err) {
+    console.log(err);
+  }
 })
 
-app.put("/chats/:id", async(req,res)=>{
-    let{id} = req.params;
-    let{msg:newmsg} = req.body;
+app.put("/chats/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    let { msg: newmsg } = req.body;
     let updatedmsg = await Chat.findByIdAndUpdate(id,
-       {msg:newmsg},
-      {runValidators:true, new:true}
+      { msg: newmsg },
+      { runValidators: true, new: true }
     );
 
     console.log(updatedmsg);
     res.redirect("/chats");
+  } catch (err) {
+    console.log(err
+    );
+  }
 })
 
-app.delete("/chats/:id",async(req,res)=>{
-  let{id} = req.params;
-  let deletechat = await Chat.findByIdAndDelete(id);
-  console.log(deletechat);
-  res.redirect("/chats");
+app.delete("/chats/:id", async (req, res) => {
+  try {
+    let { id } = req.params;
+    let deletechat = await Chat.findByIdAndDelete(id);
+    console.log(deletechat);
+    res.redirect("/chats");
+  } catch (err) { console.log(err); }
 })
 
 app.get("/",(req,res)=>{
